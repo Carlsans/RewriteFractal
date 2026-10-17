@@ -1,0 +1,29 @@
+# generated output and data (hundreds of thousands of files)
+images/
+choosens/
+runs/
+downloaded_images/
+ots_timestamps/
+build/
+*.png
+*.gif
+!docs/*.png
+!src/baceinsteinfullpng.png
+# models and caches
+*.pth
+*.pt
+__pycache__/
+.venv/
+.idea/
+*.so
+src/RewriterEngineCython.c
+src/RewriterEngineCython.cpp
+src/RewriterEngineCython.html
+gaoptuna.db
+# machine-specific copies of other projects
+src/classificationfolder/
+src/model/
+.stfolder/
+.stignore
+*.webp
+*.jpg

@@ -1,0 +1,11 @@
+torch
+numpy
+matplotlib
+Pillow
+jsonpickle
+PySide6
+# optional
+# optuna          (Legacy tab: hyperparameter study)
+# deap            (only the original GeneticAlgorithm.py)
+# scipy opencv-python scikit-image scikit-learn   (ClaudesMethod / RewriterEvaluator metrics, original scripts)
+# pycryptodome    (the original random generator; the GUI falls back to the standard library)
