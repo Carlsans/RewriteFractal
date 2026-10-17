@@ -17,6 +17,9 @@ from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QDoubleSpinBo
 from gui import bridge  # noqa: E402
 
 
+_JOBS = []
+
+
 class Job(QThread):
     log = Signal(str)
     finished_ok = Signal(object)
@@ -24,6 +27,7 @@ class Job(QThread):
 
     def __init__(self, fn):
         super().__init__()
+        _JOBS.append(self)
         self.fn, self._stop = fn, threading.Event()
 
     def should_stop(self):
@@ -496,6 +500,16 @@ class MainWindow(QMainWindow):
         self.evolve.send_genome.connect(into_explore)
         self.legacy.send_genome.connect(into_explore)
         self.resize(1250, 850)
+
+    def closeEvent(self, event):
+        running = [job for job in _JOBS if job.isRunning()]
+        for job in running:
+            job.stop()
+        # a QThread destroyed while running aborts the process, and terminating one inside CUDA does too
+        if not all(job.wait(15000) for job in running):
+            import os
+            os._exit(0)
+        super().closeEvent(event)
 
 
 def main():
